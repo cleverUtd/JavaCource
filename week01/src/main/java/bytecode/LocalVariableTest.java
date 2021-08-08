@@ -1,4 +1,4 @@
-package com.zclau.bytecode;
+package bytecode;
 
 public class LocalVariableTest {
 

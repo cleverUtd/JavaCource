@@ -1,4 +1,4 @@
-package com.zclau.classloader;
+package classloader;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package com.zclau.classloader;
+package classloader;
 
 import java.lang.reflect.Field;
 import java.net.URL;

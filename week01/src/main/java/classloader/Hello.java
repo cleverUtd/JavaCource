@@ -1,4 +1,4 @@
-package com.zclau.classloader;
+package classloader;
 
 /**
  * @author liuzicong
