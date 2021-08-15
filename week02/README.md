@@ -26,4 +26,4 @@
 
 7. （选做）运行课上的例子，以及 Netty 的例子，分析相关现象。
 8. （必做）写一段代码，使用 _HttpClient_ 或 OkHttp 访问 http://localhost:8801 ，代码提交到 GitHub
-代码看：[OkHttpUtils.java](https://github.com/cleverUtd/JavaCource/blob/main/week02/src/main/java/httpserver/OkHttpUtils.java)
+- 代码看：[OkHttpUtils.java](https://github.com/cleverUtd/JavaCource/blob/main/week02/src/main/java/httpserver/OkHttpUtils.java)
