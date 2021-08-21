@@ -1,9 +1,21 @@
-# 第2周作业
+# 第2周 
 
-1. （选做）使用 GCLogAnalysis.java 自己演练一遍 串行/并行/CMS/G1 的案例。
-2. （选做）使用压测工具（wrk 或 sb），演练 gateway-server-0.0.1-SNAPSHOT.jar 示例。
-3. （选做）如果自己本地有可以运行的项目，可以按照 2 的方式进行演练。
-4. （必做）根据上述自己对于 1 和 2 的演示，写一段对于不同 GC 和堆内存的总结，提交到 GitHub。
+# 内容回顾
+- GC日志解读与分析
+- JVM线程堆栈数据分析
+- 内存分析与相关工具
+- JVM问题分析调优经验
+- JVM疑难情况问题分析
+- Java Socket编程
+- IO处理过程分析
+- IO模型与NIO
+- Netty介绍与示例
+
+# 作业
+- [x] （选做）使用 GCLogAnalysis.java 自己演练一遍 串行/并行/CMS/G1 的案例。
+- [x] （选做）使用压测工具（wrk 或 sb），演练 gateway-server-0.0.1-SNAPSHOT.jar 示例。
+- [x] （选做）如果自己本地有可以运行的项目，可以按照 2 的方式进行演练。
+- [x] （必做）根据上述自己对于 1 和 2 的演示，写一段对于不同 GC 和堆内存的总结，提交到 GitHub。
    应用不同的垃圾收集算法运行GCLogAnalysis.java
 
 
@@ -25,6 +37,7 @@
       - 串行GC在堆内存为4G时创建对象个数明显少于2G时的对象，原因是堆比较大时，业务暂停时间较长；
 
 
-7. （选做）运行课上的例子，以及 Netty 的例子，分析相关现象。
-8. （必做）写一段代码，使用 _HttpClient_ 或 OkHttp 访问 http://localhost:8801 ，代码提交到 GitHub
+- [x] （选做）运行课上的例子，以及 Netty 的例子，分析相关现象。
+- [x] （必做）写一段代码，使用 _HttpClient_ 或 OkHttp 访问 http://localhost:8801 ，代码提交到 GitHub
 > 代码看：[OkHttpUtils.java](https://github.com/cleverUtd/JavaCource/blob/main/week02/src/main/java/httpserver/OkHttpUtils.java)
+
