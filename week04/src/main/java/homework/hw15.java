@@ -1,11 +1,14 @@
 package homework;
 
 import java.util.Random;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.SynchronousQueue;
 
-public class hw14 {
+public class hw15 {
 
-    static SynchronousQueue<Integer> synchronousQueue = new SynchronousQueue<>();
+    static Semaphore semaphore = new Semaphore(0);
+    static int result;
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         long start=System.currentTimeMillis();
         new Thread(() -> {
@@ -14,15 +17,12 @@ public class hw14 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            try {
-                synchronousQueue.put(new Random().nextInt(100));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            result = new Random().nextInt(100);
+            semaphore.release();
         }).start();
 
-
-        System.out.println("异步计算结果为："+ synchronousQueue.take());
+        semaphore.acquire();
+        System.out.println("异步计算结果为："+ result);
         System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
     }

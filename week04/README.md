@@ -16,5 +16,6 @@
 - [ ] （选做）列举常用的并发操作 API 和工具类，简单分析其使用场景和优缺点。
 - [ ] （选做）请思考: 什么是并发? 什么是高并发? 实现高并发高可用系统需要考虑哪些 因素，对于这些你是怎么理解的?
 - [ ] （选做）请思考: 还有哪些跟并发类似 / 有关的场景和问题，有哪些可以借鉴的解决 办法。
-- [ ] （必做）把多线程和并发相关知识梳理一遍，画一个脑图，截图上传到 GitHub 上。 可选工具:xmind，百度脑图，wps，MindManage，或其他。
+- [x] （必做）把多线程和并发相关知识梳理一遍，画一个脑图，截图上传到 GitHub 上。 可选工具:xmind，百度脑图，wps，MindManage，或其他。
+> [Java并发编程梳理](https://github.com/cleverUtd/JavaCource/tree/main/week04/src/main/resources/Java并发编程.png)
 
