@@ -1,0 +1,8 @@
+spring:
+  school:
+    name: Tsinghua University
+    students:
+      - id: 101
+        name: student101
+      - id: 102
+        name: student102

@@ -1,6 +1,15 @@
 # 第5周
 
 ## 内容回顾
+1. Spring发展与框架
+2. Spring AOP
+3. Spring bean
+4. Spring xml配置
+5. Spring JMS 示例
+6. Spring Boot
+7. Hibernate
+8. Mybatis
+9. Spring + ORM
 
 
 ## 作业
@@ -9,7 +18,10 @@
 - [x] 2.（必做）写代码实现 Spring Bean 的装配，方式越多越好（XML、Annotation 都可以）, 提交到 GitHub。
 > 方式一：通过配置@ComponentScan(basePackages = "beanWired")来启动扫描 </br>
 方式二：基于Java的显式配置，通过@Bean手动创建Bean </br>
-方式三：利用BeanDefinitionRegistryPostProcessor，定义beanDefinition </br></br>
+方式三：利用BeanDefinitionRegistryPostProcessor，定义beanDefinition </br>
+方式四：xml文件定义bean </br>
+方式五：自定义xsd </br>
+方式六：springboot starter自动化配置 </br></br>
 [具体代码](https://github.com/cleverUtd/JavaCource/tree/main/week05/src/main/java/beanWired)
 
 - [ ] 3.（选做）实现一个 Spring XML 自定义配置，配置一组 Bean，例如：Student/Klass/School。
@@ -24,7 +36,9 @@
 - [ ] 5.（选做）总结一下，单例的各种写法，比较它们的优劣。
 - [ ] 6.（选做）maven/spring 的 profile 机制，都有什么用法？
 - [ ] 7.（选做）总结 Hibernate 与 MyBatis 的各方面异同点。
-- [ ] 8.（必做）给前面课程提供的 Student/Klass/School 实现自动配置和 Starter。 
+- [x] 8.（必做）给前面课程提供的 Student/Klass/School 实现自动配置和 Starter。 
+> [自定义 school-spring-boot-starter](https://github.com/cleverUtd/JavaCource/tree/main/school-spring-boot-starter) </br></br>
+[使用例子](https://github.com/cleverUtd/JavaCource/tree/main/week05/src/main/java/starter)
 - [ ] 9.（选做）学习 MyBatis-generator 的用法和原理，学会自定义 TypeHandler 处理复杂类型。
 - [ ] 10.（必做）研究一下 JDBC 接口和数据库连接池，掌握它们的设计和用法：
           1）使用 JDBC 原生接口，实现数据库的增删改查操作。
