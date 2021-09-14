@@ -25,53 +25,51 @@
 - [x] 6.（必做）基于电商交易场景（用户、商品、订单），设计一套简单的表结构，提交 DDL 的 SQL 文件到 Github（后面 2 周的作业依然要是用到这个表结构）。
 
 ```
-CREATE TABLE `user` (
+CREATE TABLE `t_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
   `password`  varchar(64) NOT NULL DEFAULT '' COMMENT '密码',
   `nickname` varchar(64) NOT NULL DEFAULT '' COMMENT '昵称',
   `email` varchar(64) NOT NULL DEFAULT '' COMENT '邮件'，
   `valid` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '0-无效 1-有效',
-  `create_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='用户信息';
 
-CREATE TABLE `order` (
+CREATE TABLE `t_order` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
   `order_seq` int(11) NOT NULL DEFAULT 0 COMMENT '订单号',
   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
-  `order_amount` bigint(20) NOT NULL DEFAULT 0 COMMENT '订单金额。 单位：分',
+  `order_amount` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '订单金额',
   `status` int(11)  NOT NULL DEFAULT 200 COMMENT '订单状态 100-已成单，未支付，200-已支付',
-  `create_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_order_seq` (`order_seq`)
   KEY `user_id`(`user_id`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='用户订单';
 
-
-
-CREATE TABLE `order_item` (
+CREATE TABLE `t_order_item` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
   `order_seq` int(11) NOT NULL DEFAULT 0 COMMENT '订单号',
   `sku` varchar(64) NOT NULL DEFAULT '' COMMENT '商品sku'
   `amount` int(11) NOT NULL DEFAULT 0 COMMENT '购买数量', 
-  `create_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `order_seq` (`order_seq`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='订单明细';
 
 
-CREATE TABLE `product` (
+CREATE TABLE `t_product` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
   `spu` varchar(64) NOT NULL DEFAULT '' COMMENT '商品编号',
   `product_name` varchar(64) NOT NULL DEFAULT '' COMMENT '商品名称。 如Iphone12',
   `category_id` int(11) NOT NULL DEFAULT 0 COMMENT '商品分类id',
   `attribute` text NOT NULL COMMENT '商品属性集合，json格式',
-  `create_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `spu` (`spu`)
@@ -85,8 +83,8 @@ CREATE TABLE `product_specs` (
   `sku` varchar(64) NOT NULL DEFAULT '' COMMENT '商品规格编号',
   `product_specs_name` varchar(64) NOT NULL DEFAULT '' COMMENT '规格名称。 如 iphone12-128G',
   `stock` int(11) NOT NULL DEFAULT 0 COMMENT '库存',
-  `price` bigint(11) NOT NULL DEFAULT 0 COMMENT '售卖价格。 单位：分',
-  `create_time` datetime NOT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '售卖价格',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_sku` (`sku`)
