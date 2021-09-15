@@ -38,10 +38,28 @@ CREATE TABLE `t_user` (
   UNIQUE KEY `uk_email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='用户信息';
 
+CREATE TABLE `t_user_address` (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
+   `address_seq` varchar(64) NOT NULL DEFAULT '' COMMENT '地址编码。用作唯一主键',
+   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
+   `phone` varchar(32) NOT NULL DEFAULT '' COMMENT '手机号码',
+   `prov` varchar(16) NOT NULL DEFAULT '' COMMENT '省',
+   `city` varchar(16) NOT NULL DEFAULT '' COMMENT '市',
+   `area` varchar(16) NOT NULL DEFAULT '' COMMENT '区',
+   `address` varchar(255) NOT NULL DEFAULT '' COMMENT '街道地址',
+   `default_address` tinyint(2) NOT NULL DEFAULT 0 COMMENT '默认收货地址 1=>默认',
+   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `uk_address_seq`(`address_seq`),
+   KEY `idx_user_id`(`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='用户收货地址';
+
 CREATE TABLE `t_order` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
   `order_seq` int(11) NOT NULL DEFAULT 0 COMMENT '订单号',
   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
+  `address_seq` varchar(64) NOT NULL DEFAULT '' COMMENT '收货地址',
   `order_amount` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '订单金额',
   `status` int(11)  NOT NULL DEFAULT 200 COMMENT '订单状态 100-已成单，未支付，200-已支付',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -62,7 +80,6 @@ CREATE TABLE `t_order_item` (
   KEY `order_seq` (`order_seq`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='订单明细';
 
-
 CREATE TABLE `t_product` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
   `spu` varchar(64) NOT NULL DEFAULT '' COMMENT '商品编号',
@@ -74,8 +91,6 @@ CREATE TABLE `t_product` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `spu` (`spu`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='商品表';
-
-
 
 CREATE TABLE `product_specs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
@@ -89,6 +104,7 @@ CREATE TABLE `product_specs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_sku` (`sku`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='商品规格表';
+
 ```
 
 - [ ] 7.（选做）尽可能多的从“常见关系数据库”中列的清单，安装运行，并使用上一题的 SQL 测试简单的增删改查。
