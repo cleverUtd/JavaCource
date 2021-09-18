@@ -65,7 +65,7 @@ CREATE TABLE `t_order` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_order_seq` (`order_seq`)
+  UNIQUE KEY `uk_order_seq` (`order_seq`),
   KEY `user_id`(`user_id`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='用户订单';
 
