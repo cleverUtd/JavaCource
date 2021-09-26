@@ -22,6 +22,7 @@
         <module>school-spring-boot-starter</module>
         <module>week06</module>
         <module>week07</module>
+        <module>week08</module>
     </modules>
 
 
