@@ -1,5 +1,6 @@
 package io.kimmking.rpcfx.demo.provider;
 
+import io.kimmking.rpcfx.aop.GlobalExceptionAspect;
 import io.kimmking.rpcfx.api.RpcfxRequest;
 import io.kimmking.rpcfx.api.RpcfxResolver;
 import io.kimmking.rpcfx.api.RpcfxResponse;
@@ -13,14 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = GlobalExceptionAspect.class)
 @RestController
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class RpcfxServerApplication {
 
 	public static void main(String[] args) throws Exception {
@@ -67,12 +71,12 @@ public class RpcfxServerApplication {
 	RpcfxInvoker invoker;
 
 	@PostMapping("/")
-	public RpcfxResponse invoke(@RequestBody RpcfxRequest request) {
+	public RpcfxResponse invoke(@RequestBody RpcfxRequest request) throws InvocationTargetException, IllegalAccessException {
 		return invoker.invoke(request);
 	}
 
 	@Bean
-	public RpcfxInvoker createInvoker(@Autowired RpcfxResolver resolver){
+	public RpcfxInvoker rpcfxInvoker(@Autowired RpcfxResolver resolver){
 		return new RpcfxInvoker(resolver);
 	}
 
