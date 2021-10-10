@@ -90,8 +90,10 @@ public final class Rpcfx {
 
             // 这里判断response.status，处理异常
             // 考虑封装一个全局的RpcfxException
-
-            return JSON.parse(response.getResult().toString());
+            if (response.isStatus()) {
+                return JSON.parse(response.getResult().toString());
+            }
+            throw response.getException();
         }
 
         private RpcfxResponse post(RpcfxRequest req, String url) throws IOException {

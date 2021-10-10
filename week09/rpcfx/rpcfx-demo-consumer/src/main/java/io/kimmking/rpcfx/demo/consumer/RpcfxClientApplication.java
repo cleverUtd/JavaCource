@@ -5,6 +5,9 @@ import io.kimmking.rpcfx.api.LoadBalancer;
 import io.kimmking.rpcfx.api.Router;
 import io.kimmking.rpcfx.api.RpcfxRequest;
 import io.kimmking.rpcfx.client.Rpcfx;
+import io.kimmking.rpcfx.client.RpcfxByteBuddy;
+import io.kimmking.rpcfx.demo.api.Order;
+import io.kimmking.rpcfx.demo.api.OrderService;
 import io.kimmking.rpcfx.demo.api.User;
 import io.kimmking.rpcfx.demo.api.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,14 +29,16 @@ public class RpcfxClientApplication {
 		// UserService service = new xxx();
 		// service.findById
 
-		UserService userService = Rpcfx.create(UserService.class, "http://localhost:8081/");
-		User user = userService.findById(1);
-		System.out.println("find user id=1 from server: " + user.getName());
+		UserService userService = RpcfxByteBuddy.create(UserService.class, "http://localhost:8081/");
+		if (userService != null) {
+			User user = userService.findById(1);
+			System.out.println("find user id=1 from server: " + user.getName());
+		}
 
-//		OrderService orderService = Rpcfx.create(OrderService.class, "http://localhost:8080/");
-//		Order order = orderService.findOrderById(1992129);
-//		System.out.println(String.format("find order name=%s, amount=%f",order.getName(),order.getAmount()));
-//
+		OrderService orderService = Rpcfx.create(OrderService.class, "http://localhost:8081/");
+		Order order = orderService.findOrderById(1992129);
+		System.out.printf("find order name=%s, amount=%f%n",order.getName(),order.getAmount());
+		//
 //		//
 //		UserService userService2 = Rpcfx.createFromRegistry(UserService.class, "localhost:2181", new TagRouter(), new RandomLoadBalancer(), new CuicuiFilter());
 
