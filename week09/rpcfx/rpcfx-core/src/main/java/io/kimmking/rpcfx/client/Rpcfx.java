@@ -100,7 +100,7 @@ public final class Rpcfx {
             String reqJson = JSON.toJSONString(req);
             System.out.println("req json: "+reqJson);
 
-            // 1.可以复用client
+            // 1.可以复用clien`t
             // 2.尝试使用httpclient或者netty client
             OkHttpClient client = new OkHttpClient();
             final Request request = new Request.Builder()
