@@ -4,6 +4,10 @@ package io.kimmking.rpcfx.client;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
 import io.kimmking.rpcfx.api.*;
+import io.kimmking.rpcfx.client.netty.NettyHttpClient;
+import io.kimmking.rpcfx.client.netty.domain.NettyHttpRequest;
+import io.kimmking.rpcfx.client.netty.domain.NettyHttpResponse;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,6 +20,7 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public final class Rpcfx {
 
     static {
@@ -83,8 +88,8 @@ public final class Rpcfx {
                 }
             }
 
-            RpcfxResponse response = post(request, url);
-
+//            RpcfxResponse response = post(request, url);
+            RpcfxResponse response = postUsingNettyClient(request, url);
             // 加filter地方之三
             // Student.setTeacher("cuijing");
 
@@ -100,7 +105,7 @@ public final class Rpcfx {
             String reqJson = JSON.toJSONString(req);
             System.out.println("req json: "+reqJson);
 
-            // 1.可以复用client
+            // 1.可以复用clien`t
             // 2.尝试使用httpclient或者netty client
             OkHttpClient client = new OkHttpClient();
             final Request request = new Request.Builder()
@@ -112,5 +117,17 @@ public final class Rpcfx {
             return JSON.parseObject(respJson, RpcfxResponse.class);
         }
 
+        private RpcfxResponse postUsingNettyClient(RpcfxRequest req, String url) {
+            NettyHttpClient httpClient = new NettyHttpClient(url);
+            httpClient.initConnection();
+
+            String reqJson = JSON.toJSONString(req);
+            log.info("req json: {}", reqJson);
+            final NettyHttpRequest request = new NettyHttpRequest(url, reqJson);
+            NettyHttpResponse response = httpClient.doPost(request);
+            log.info("resp json: {}", response.getBody());
+
+            return JSON.parseObject(response.getBody(), RpcfxResponse.class);
+        }
     }
 }

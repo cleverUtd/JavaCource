@@ -19,54 +19,46 @@ import java.util.List;
 @Slf4j
 public class RpcfxClientApplication {
 
-	// 二方库
-	// 三方库 lib
-	// nexus, userserivce -> userdao -> user
-	//
+    // 二方库
+    // 三方库 lib
+    // nexus, userserivce -> userdao -> user
+    //
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		// UserService service = new xxx();
-		// service.findById
+        UserService userService = RpcfxByteBuddy.create(UserService.class, "http://localhost:8081/");
+        if (userService != null) {
+            User user = userService.findById(1);
+            log.info("find user id=1 from server: {}", user.getName());
+        }
 
-		UserService userService = RpcfxByteBuddy.create(UserService.class, "http://localhost:8081/");
-		if (userService != null) {
-			User user = userService.findById(1);
-			System.out.println("find user id=1 from server: " + user.getName());
-		}
+        OrderService orderService = Rpcfx.create(OrderService.class, "http://localhost:8081/");
+        Order order = orderService.findOrderById(1992129);
+        log.info("find order name= {}, amount= {}", order.getName(), order.getAmount());
+    }
 
-		OrderService orderService = Rpcfx.create(OrderService.class, "http://localhost:8081/");
-		Order order = orderService.findOrderById(1992129);
-		System.out.printf("find order name=%s, amount=%f%n",order.getName(),order.getAmount());
-		//
-//		//
-//		UserService userService2 = Rpcfx.createFromRegistry(UserService.class, "localhost:2181", new TagRouter(), new RandomLoadBalancer(), new CuicuiFilter());
+    private static class TagRouter implements Router {
+        @Override
+        public List<String> route(List<String> urls) {
+            return urls;
+        }
+    }
 
-//		SpringApplication.run(RpcfxClientApplication.class, args);
-	}
+    private static class RandomLoadBalancer implements LoadBalancer {
+        @Override
+        public String select(List<String> urls) {
+            return urls.get(0);
+        }
+    }
 
-	private static class TagRouter implements Router {
-		@Override
-		public List<String> route(List<String> urls) {
-			return urls;
-		}
-	}
-
-	private static class RandomLoadBalancer implements LoadBalancer {
-		@Override
-		public String select(List<String> urls) {
-			return urls.get(0);
-		}
-	}
-
-	@Slf4j
-	private static class CuicuiFilter implements Filter {
-		@Override
-		public boolean filter(RpcfxRequest request) {
+    @Slf4j
+    private static class CuicuiFilter implements Filter {
+        @Override
+        public boolean filter(RpcfxRequest request) {
 //			log.info("filter {} -> {}", this.getClass().getName(), request.toString());
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }
 
 
