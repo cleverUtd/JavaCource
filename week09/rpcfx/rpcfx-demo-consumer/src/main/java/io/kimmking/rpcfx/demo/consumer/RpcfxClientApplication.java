@@ -26,13 +26,13 @@ public class RpcfxClientApplication {
 
     public static void main(String[] args) {
 
-        UserService userService = RpcfxByteBuddy.create(UserService.class, "http://localhost:8081/");
+        UserService userService = RpcfxByteBuddy.create(UserService.class, "http://127.0.0.1:8081/");
         if (userService != null) {
             User user = userService.findById(1);
             log.info("find user id=1 from server: {}", user.getName());
         }
 
-        OrderService orderService = Rpcfx.create(OrderService.class, "http://localhost:8081/");
+        OrderService orderService = Rpcfx.create(OrderService.class, "http://127.0.0.1:8081/");
         Order order = orderService.findOrderById(1992129);
         log.info("find order name= {}, amount= {}", order.getName(), order.getAmount());
     }

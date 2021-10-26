@@ -60,8 +60,6 @@ public class NettyHttpClient implements Closeable {
                 ch.pipeline().addLast(new HttpClientCodec());
                 // 把多个HTTP请求中的数据组装成一个
                 ch.pipeline().addLast(new HttpObjectAggregator(65536));
-                // 用于处理大数据流
-                ch.pipeline().addLast(new ChunkedWriteHandler());
                 /**
                  * 发送业务数据前，进行json编码
                  */

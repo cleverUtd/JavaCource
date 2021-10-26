@@ -47,7 +47,7 @@ public class HttpJsonRequestEncoder extends MessageToMessageEncoder<NettyHttpReq
          * headers 设置
          */
         HttpHeaders headers = request.headers();
-        headers.set(HttpHeaderNames.HOST, ctx.channel().remoteAddress().toString().substring(0));
+        headers.set(HttpHeaderNames.HOST, ctx.channel().remoteAddress().toString().substring(1));
         headers.set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
 
         headers.set(HttpHeaderNames.CONTENT_TYPE,
