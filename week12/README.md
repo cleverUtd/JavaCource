@@ -21,7 +21,7 @@ docker run -p 6380:6380 -v /Users/zclau/docker/redis/redis6380.conf:/opt/redis.c
 ![6380 info](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6380info.png)
 
 - 往master写数据，salve能读取到
-- 
+
 ![6379set](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6379set.png)
 ![6380read](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6380read.png)
 
@@ -29,8 +29,8 @@ docker run -p 6380:6380 -v /Users/zclau/docker/redis/redis6380.conf:/opt/redis.c
 - 在上述部署的6379和6380主从下，通过配置sentinel实例实现主从切换，并且配置两个sentinel实例实现高可用
 
 sentinel配置：
-![sentinel0.conf](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/java/redis/sentinel0.conf)
-![sentinel1.conf](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/java/redis/sentinel1.conf)
+[sentinel0.conf](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/java/redis/sentinel0.conf)
+[sentinel1.conf](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/java/redis/sentinel1.conf)
 
 ```
 docker run -p 26379:26379 --name redis_sentinel0 \
