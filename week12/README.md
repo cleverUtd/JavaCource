@@ -16,10 +16,12 @@ docker run -p 6380:6380 -v /Users/zclau/docker/redis/redis6380.conf:/opt/redis.c
 ![slave](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/slave.png)
 
 - 通过info命令，证明6379是以master角色，6380是salve
+
 ![6379 info](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6379info.png)
 ![6380 info](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6380info.png)
 
 - 往master写数据，salve能读取到
+- 
 ![6379set](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6379set.png)
 ![6380read](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6380read.png)
 
