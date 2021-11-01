@@ -58,5 +58,30 @@ sentinel将6380切换成master
 变为salve
 ![6379restart](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/6379restart.png)
 
+### 1.3 redis cluster 集群
+
+- 搭建redis cluster集群 6379，6380，6381
+配置：
+[redis_cluster6379.conf](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/java/redis/redis_cluster6379.conf) 、
+[redis_cluster6380.conf](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/java/redis/redis_cluster6380.conf) 、
+[redis_cluster6381.conf](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/java/redis/redis_cluster6381.conf)
+
+- a. 先分别启动 6379，6380，6381 3个实例
+- b. 然后使用redis-cli创建集群 `redis-cli --cluster create 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381`
+
+![redis_cluster_create](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/redis_cluster_create.png)
+
+- c. 查看集群节点信息
+
+![clsuter_nodes](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/clsuter_nodes.png)
+
+- d.如果用以往单机版 redis-cli set值时，如果key对应的hash不在当前实例，会返回错误。
+
+![set_by_normal_redis_cli](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/set_by_normal_redis_cli.png)
+
+- e. 使用redis-cli连接redis时，可以指定使用cluster模式 `redis-cli -c -p 6379`。这样当set值时，redis集群会自动重定向到key对应的集群上并set值
+
+![redis_cli_c](https://github.com/cleverUtd/JavaCource/blob/main/week12/src/main/resources/redis_cli_c.png)
+
 
 ## 2. 搭建 ActiveMQ 服务，基于 JMS，写代码分别实现对于 queue 和 topic 的消息生产和消费
